@@ -1,4 +1,4 @@
-name="Installation"
+name="Hyprland Starter"
 description="placeholder"
 author="Diana Ward"
 order=1

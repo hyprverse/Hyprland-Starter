@@ -1,2 +1,5 @@
 gum
 figlet
+unzip
+wget
+rsync

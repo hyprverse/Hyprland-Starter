@@ -1,5 +1,9 @@
 hyprland
+alacritty
 xdg-user-dirs
 xdg-desktop-portal-hyprland
 qt5-wayland
 qt6-wayland
+mako
+nautilus
+pfetch-rs-bin
