@@ -4,7 +4,7 @@ _install_script() {
 
     read -p "Press enter to continue"
 
-    if ! _installPackages ~/install/modules/install_dependecies/packages.txt; then
+    if ! _installPackages ~/Hyprland-Starter/modules/install_dependecies/packages.txt; then
         echo "Error: Failed to install packages"
         return 1
     fi
@@ -30,8 +30,22 @@ _install_script() {
         fi
     fi
 
-    cd ~/install
+    cd ~/Hyprland-Starter
 }
+
+_check_for_updates() {
+    echo "Checking for updates using paru"
+
+    if command -v paru >/dev/null 2>&1; then
+        echo "Running paru -Syu to check for updates"
+        paru -Syu
+    else
+        echo "paru is not installed. Please install it first."
+    fi
+}
+
+# Call the function to check for updates
+_check_for_updates
 
 _install_script
 

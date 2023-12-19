@@ -1,4 +1,4 @@
 figlet "Packages"
 echo "Installing packages"
 
-_installPackages ~/install/modules/hyprland_installation/packages.txt
+_installPackages ~/Hyprland-Starter/modules/hyprland_installation/packages.txt
