@@ -1,5 +1,5 @@
 name="Hyprland Installation"
-order=03
+order=04
 author="Diana Ward"
 
 
