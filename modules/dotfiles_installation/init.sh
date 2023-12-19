@@ -6,6 +6,7 @@ if gum confirm "DO YOU WANT TO COPY THE PREPARED dotfiles INTO .config? (YOU CAN
     rsync -a -I ~/Hyprland-Starter/hypr ~/.config
     rsync -a -I ~/Hyprland-Starter/swaylock ~/.config
     rsync -a -I ~/Hyprland-Starter/mako ~/.config
+    rsync -a -I ~/Hyprland-Starter/.wallpaper ~/.wallpaper
     echo ""
     echo ":: Configuration files successfully copied to ~/.config/"
     echo ""
