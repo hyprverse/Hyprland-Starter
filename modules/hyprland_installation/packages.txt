@@ -7,3 +7,6 @@ qt6-wayland
 mako
 nautilus
 pfetch-rs-bin
+swaylock-effects-git
+swayidle
+swww
