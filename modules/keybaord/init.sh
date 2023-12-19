@@ -2,22 +2,28 @@
 
 # Default layout and variants
 figlet "Keyboard Conf"
-keyboard_layout="us"
+kb_layout="us"
 
 _setupKeyboardLayout() {
     echo ""
     echo "Start typing = Search, RETURN = Confirm, CTRL-C = Cancel"
-    keyboard_layout=$(localectl list-x11-keymap-layouts | gum filter --height 15 --placeholder "Find your keyboard layout...")
+    kb_layout=$(localectl list-x11-keymap-layouts | gum filter --height 15 --placeholder "Find your keyboard layout...")
     echo ""
-    echo "Keyboard layout changed to $keyboard_layout"
+    echo "Keyboard layout changed to $kb_layout"
     echo ""
     _confirmKeyboard
 }
-
 _confirmKeyboard() {
     echo "Current selected keyboard setup:"
-    echo "Keyboard layout: $keyboard_layout"
+    echo "Keyboard layout: $kb_layout"
     if gum confirm "Do you want proceed with this keyboard setup?" --affirmative "Proceed" --negative "Change" ;then
+        SEARCH="kb_layout = .*"
+        REPLACE="kb_layout = $kb_layout"
+        sed -i "s/$SEARCH/$REPLACE/g" ~/Hyprland-Starter/modules/keybaord/templates/keyboard.conf
+        cp ~/Hyprland-Starter/modules/keybaord/templates/keyboard.conf ~/.config/hypr/conf/keyboard.conf
+        echo ""
+        echo "Keyboard setup updated successfully."
+        echo "PLEASE NOTE: You can update your keyboard layout later in ~/Hyprland-Starter/modules/keybaord/templates/keyboard.conf"
         return 0
     elif [ $? -eq 130 ]; then
         exit 130
@@ -29,16 +35,5 @@ _confirmKeyboard() {
 if [ "$restored" == "1" ]; then
     echo "You have already restored your settings into the new installation."
 else
-    _confirmKeyboard
-    
-    cp ~/Hyprland-Starter/modules/keyboard/templates/keyboard.conf ~/.config/hypr/conf/keyboard.conf
-    
-    SEARCH="\"KEYBOARD_LAYOUT\""
-    REPLACE="\"$keyboard_layout\""
-    sed -i "s/$SEARCH/$REPLACE/g" ~/Hyprland-Starter/modules/keyboard/templates/keyboard.py
-
-    echo ""
-    echo "Keyboard setup updated successfully."
-    echo "PLEASE NOTE: You can update your keyboard layout later in ~/Hyprland-Starter/modules/keyboard/templates/keyboard.conf"
+    _setupKeyboardLayout
 fi
-
