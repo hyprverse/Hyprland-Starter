@@ -23,6 +23,16 @@ installGPUDrivers() {
 
     if [ -f "$file_path" ]; then
         _installPackages "$file_path" || echo "ERROR: Failed to install GPU drivers for $selected_brand"
+        
+        # Set environment variables based on the selected GPU brand
+        if [ "$selected_brand" == "nvidia" ]; then
+            echo "Setting environment variables for NVIDIA drivers..."
+            echo "env = LIBVA_DRIVER_NAME,nvidia" >> ~/Hyprland-Starter/hypr/conf/env/default.conf
+            echo "env = XDG_SESSION_TYPE,wayland" >> ~/Hyprland-Starter/hypr/conf/env/default.conf
+            echo "env = GBM_BACKEND,nvidia-drm" >> ~/Hyprland-Starter/hypr/conf/env/default.conf
+            echo "env = __GLX_VENDOR_LIBRARY_NAME,nvidia" >> ~/Hyprland-Starter/hypr/conf/env/default.conf
+            echo "env = WLR_NO_HARDWARE_CURSORS,1" >> ~/Hyprland-Starter/hypr/conf/env/default.conf
+        fi
     else
         echo "ERROR: Invalid file path for $selected_brand"
     fi
@@ -36,4 +46,3 @@ while true; do
     # Ask if the user wants to install drivers for another GPU brand
     gum confirm "Do you want to install drivers for another GPU brand?" || break
 done
-
